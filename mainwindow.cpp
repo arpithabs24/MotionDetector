@@ -32,7 +32,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_actionFile_triggered()
 {
-    QString fname=QFileDialog::getOpenFileName(this,"Open Video File");
+    QString fname=QFileDialog::getOpenFileName(this,"Open Video File",QDesktopServices::storageLocation(QDesktopServices::MoviesLocation));
         vid->open(fname.toStdString());
         cv::Mat temp;
         vid->read(temp);
