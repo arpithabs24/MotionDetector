@@ -2,7 +2,8 @@
 #include "ui_mainwindow.h"
 #include <QFileDialog>
 #include <QDesktopServices>
-#include <opencv2/highgui/highgui.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
+#include <opencv2/imgcodecs/imgcodecs.hpp>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -32,7 +33,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_actionFile_triggered()
 {
-    QString fname=QFileDialog::getOpenFileName(this,"Open Video File",QDesktopServices::storageLocation(QDesktopServices::MoviesLocation));
+    QString fname=QFileDialog::getOpenFileName(this,"Open Video File",QStandardPaths::standardLocations(QStandardPaths::MoviesLocation).first());
         vid->open(fname.toStdString());
         cv::Mat temp;
         vid->read(temp);
@@ -99,11 +100,11 @@ void MainWindow::DisplayImage()
                     std::swap(points[1], points[0]);
                     points[0].clear();
                     gray.copyTo(prevGray);
-                    cv::cvtColor(image,image,CV_BGR2RGB);
+                    cv::cvtColor(image,image,cv::COLOR_BGR2RGB);
                 DImage=QImage((uchar*)image.data,image.cols,image.rows,image.step,QImage::Format_RGB888);
                 ui->label->setPixmap(QPixmap::fromImage(DImage.scaled(640,480,Qt::KeepAspectRatio)));
 
-                  cv::cvtColor(gray,gray,CV_GRAY2RGB);
+                  cv::cvtColor(gray,gray,cv::COLOR_GRAY2RGB);
                 HSVImage=QImage((uchar*)Grid.data,Grid.cols,Grid.rows,Grid.step,QImage::Format_RGB888);
                 ui->label_2->setPixmap(QPixmap::fromImage(HSVImage.scaled(640,480,Qt::KeepAspectRatio)));
 
@@ -126,8 +127,8 @@ void MainWindow::on_actionSnapshot_triggered()
 
     char filename[100];
      char trailfilename[100];
-     sprintf(filename,QDesktopServices::storageLocation(QDesktopServices::PicturesLocation).toStdString().append("/capture_%d.png").data(),imcount);
-     sprintf(trailfilename,QDesktopServices::storageLocation(QDesktopServices::PicturesLocation).toStdString().append("/trails_%d.png").data(),imcount);
+     sprintf(filename,QStandardPaths::standardLocations(QStandardPaths::PicturesLocation).first().toStdString().append("/capture_%d.png").data(),imcount);
+     sprintf(trailfilename,QStandardPaths::standardLocations(QStandardPaths::PicturesLocation).first().toStdString().append("/trails_%d.png").data(),imcount);
      imcount++;
        cv::imwrite(filename,image);
        cv::imwrite(trailfilename,Grid);
