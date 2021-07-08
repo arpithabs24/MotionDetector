@@ -20,14 +20,14 @@
       <item>
        <widget class="QLabel" name="label">
         <property name="text">
-         <string>TextLabel</string>
+         <string/>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QLabel" name="label_2">
         <property name="text">
-         <string>TextLabel</string>
+         <string/>
         </property>
        </widget>
       </item>
@@ -48,7 +48,7 @@
      <x>0</x>
      <y>0</y>
      <width>400</width>
-     <height>29</height>
+     <height>27</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -63,6 +63,7 @@
      <addaction name="actionCamera"/>
     </widget>
     <addaction name="menuOpen"/>
+    <addaction name="actionExit"/>
    </widget>
    <widget class="QMenu" name="menuControl">
     <property name="title">
@@ -81,11 +82,16 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="actionFile"/>
+   <addaction name="actionCamera"/>
+   <addaction name="actionStop"/>
+   <addaction name="actionSnapshot"/>
+   <addaction name="actionExit"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionFile">
    <property name="text">
-    <string>File</string>
+    <string>Video File</string>
    </property>
   </action>
   <action name="actionCamera">
@@ -101,6 +107,11 @@
   <action name="actionSnapshot">
    <property name="text">
     <string>Snapshot</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="text">
+    <string>Exit</string>
    </property>
   </action>
  </widget>

@@ -31,6 +31,8 @@ private slots:
 
     void on_pushButton_clicked();
 
+    void on_actionExit_triggered();
+
 private:
     Ui::MainWindow *ui;
     QTimer *timer;
@@ -43,12 +45,12 @@ private:
     std::vector<cv::Point2f> points[2];
     cv::TermCriteria termcrit;
     cv::Size subPixWinSize, winSize;
-    bool needToInit = true;
+    bool needToInit;
     cv::Point2f point;
-    bool addRemovePt = false;
-    const int MAX_COUNT = 100;
+    bool addRemovePt;
+    static const int MAX_COUNT=100;
     size_t i, k;
-    int imcount=0;
+    int imcount;
 
 
 };
